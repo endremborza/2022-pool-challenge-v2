@@ -10,5 +10,6 @@
 
 | name                | v                          |   ch2-L-100 |   ch2-L-5000 |   ch2-S-1000 |   ch2-S-50 |
 |:--------------------|:---------------------------|------------:|-------------:|-------------:|-----------:|
-| hobi-sebot-solution | [v1](../../commit/f4662c7) |      9.0184 |          nan |      3.46514 |   0.534007 |
-| hobi-sebot-solution | [v2](../../commit/1d3d0eb) |    nan      |          nan |      2.89402 |   0.521794 |
+| hobi-sebot-solution | [v1](../../commit/f4662c7) |      9.0184 |      nan     |      3.46514 |   0.534007 |
+| hobi-sebot-solution | [v2](../../commit/1d3d0eb) |    nan      |      nan     |      2.89402 |   0.521794 |
+| hobi-sebot-solution | [v3](../../commit/292c045) |    nan      |      106.744 |      1.66186 |   0.452853 |
