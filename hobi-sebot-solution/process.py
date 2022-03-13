@@ -1,3 +1,4 @@
+import imp
 from constants import data_path, tree_path
 import pickle
 import json
@@ -11,22 +12,20 @@ res_cols = ["msec", "subject", "trial"]
 
 
 def get_wrong_indexes(query: dict):
-    return df[
+    return (
         (df["subject"] != query["subject"])
         | (df["msec"] < query["min_msec"])
         | (df["msec"] > query["max_msec"])
-    ].index.to_list()
+    )
 
 
 def get_solution_index(tree, query: dict):
-    wrong_index = get_wrong_indexes(query)
-    old_data = tree.data[wrong_index, 0]
-    tree.data[wrong_index, 0] = np.nan
-    solution = tree.query(
-        np.array([query["x_position"], query["y_position"], query["z_position"]])
+    tree.data[:, 3] = get_wrong_indexes(query) * 1_000
+    sol_dist, sol_id = tree.query(
+        np.array([query["x_position"], query["y_position"], query["z_position"], 0])
     )
-    tree.data[wrong_index, 0] = old_data
-    return solution[1]
+    tree.data[:, 3] = 0
+    return sol_id
 
 
 if __name__ == "__main__":
