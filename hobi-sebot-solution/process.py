@@ -3,6 +3,7 @@ import pickle
 import json
 from pathlib import Path
 import numpy as np
+from modified_tree import query_subset
 
 tree = pickle.loads(tree_path.read_bytes())
 df = pickle.loads(data_path.read_bytes())
@@ -12,20 +13,18 @@ res_cols = ["msec", "subject", "trial"]
 
 def get_wrong_indexes(query: dict):
     return (
-        (df["subject"] != query["subject"])
-        | (df["msec"] < query["min_msec"])
-        | (df["msec"] > query["max_msec"])
+        (df["subject"] == query["subject"])
+        & (df["msec"] >= query["min_msec"])
+        & (df["msec"] <= query["max_msec"])
     )
 
 
 def get_solution_index(tree, query: dict):
-    tree.data[:, 3] = get_wrong_indexes(query) * 10_000
-    sol_dist, sol_id = tree.query(
-        np.array([query["x_position"], query["y_position"], query["z_position"], 0]),
-        workers = -1,
-        distance_upper_bound = 10_000
+    sol_id, sol_dist = query_subset(
+        tree,
+        [query["x_position"], query["y_position"], query["z_position"]],
+        get_wrong_indexes(query)[lambda x: x == True].index,
     )
-    tree.data[:, 3] = 0
     return sol_id
 
 
