@@ -23,7 +23,8 @@ def get_solution_index(data_df, query: dict):
     filtered_df = data_df.loc[get_valid_indexes(query), :]
     tree = cKDTree(filtered_df.loc[:, pos_cols].values)
     sol_dist, sol_id = tree.query(
-        np.array([query["x_position"], query["y_position"], query["z_position"]])
+        np.array([query["x_position"], query["y_position"], query["z_position"]]),
+        workers=-1,
     )
     return filtered_df.iloc[sol_id, :].name
 

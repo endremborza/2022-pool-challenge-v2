@@ -1,4 +1,3 @@
-import imp
 from constants import data_path, tree_path
 import pickle
 import json
@@ -20,9 +19,11 @@ def get_wrong_indexes(query: dict):
 
 
 def get_solution_index(tree, query: dict):
-    tree.data[:, 3] = get_wrong_indexes(query) * 1_000
+    tree.data[:, 3] = get_wrong_indexes(query) * 10_000
     sol_dist, sol_id = tree.query(
-        np.array([query["x_position"], query["y_position"], query["z_position"], 0])
+        np.array([query["x_position"], query["y_position"], query["z_position"], 0]),
+        workers = -1,
+        distance_upper_bound = 10_000
     )
     tree.data[:, 3] = 0
     return sol_id
