@@ -1,0 +1,4 @@
+image-base: python:3.9
+setup-command: pip install -r requirements.txt
+etl-command: python preprocess.py
+process-command: python main.py
