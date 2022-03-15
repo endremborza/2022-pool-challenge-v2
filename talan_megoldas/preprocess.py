@@ -11,7 +11,7 @@ proc = subprocess.Popen(["python", "main.py"])
 while True:
     try:
         time.sleep(1)
-        resp = requests.get("http://localhost:5555/started")
+        resp = requests.get("http://localhost:5555/home")
         time.sleep(4)
         break
     except Exception as e:
