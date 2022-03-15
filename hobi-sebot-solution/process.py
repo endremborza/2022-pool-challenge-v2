@@ -34,5 +34,3 @@ if __name__ == "__main__":
     ].to_dict(orient="records")
 
     Path("output.json").write_text(json.dumps(result))
-    # out = json.loads(Path("results.json").read_text())
-    # assert out == result 
