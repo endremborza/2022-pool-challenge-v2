@@ -18,3 +18,4 @@
 | hobi-sebot-solution | [v4](../../commit/55eca6a) |    nan      |      123.282 |      1.43331 |   0.441569 |
 | hobi-sebot-solution | [v5](../../commit/6d15cbd) |    nan      |      nan     |     13.8274  |   1.09583  |
 | hobi-sebot-solution | [v6](../../commit/4100f53) |    nan      |      nan     |     13.5742  |   1.35401  |
+| hobi-sebot-solution | [v7](../../commit/e50eaa7) |    nan      |      nan     |     17.1944  |   1.12709  |
