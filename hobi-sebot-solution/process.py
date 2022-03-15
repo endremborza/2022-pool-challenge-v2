@@ -10,20 +10,20 @@ df = pickle.loads(data_path.read_bytes())
 input_locations = json.loads(Path("input.json").read_text())
 res_cols = ["msec", "subject", "trial"]
 
-
 def get_wrong_indexes(query: dict):
-    return (
-        (df["subject"] == query["subject"])
-        & (df["msec"] >= query["min_msec"])
-        & (df["msec"] <= query["max_msec"])
-    )
-
+    return df[
+        lambda _df: (
+            (_df["subject"] == query["subject"])
+            & (_df["msec"] >= query["min_msec"])
+            & (_df["msec"] <= query["max_msec"])
+        )
+    ].index.values
 
 def get_solution_index(tree, query: dict):
     sol_id, sol_dist = query_subset(
         tree,
         [query["x_position"], query["y_position"], query["z_position"]],
-        get_wrong_indexes(query)[lambda x: x == True].index,
+        get_wrong_indexes(query),
     )
     return sol_id
 
@@ -34,3 +34,5 @@ if __name__ == "__main__":
     ].to_dict(orient="records")
 
     Path("output.json").write_text(json.dumps(result))
+    # out = json.loads(Path("results.json").read_text())
+    # assert out == result 

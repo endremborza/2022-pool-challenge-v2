@@ -36,25 +36,19 @@ def query_subset(self, x, subset, p=2):
     return _query_subset(self, node, x, subset_vec, p)
 
 def _query_subset(self, node, x, subset, p):
-    # initialize a boolean array of size n
     child_vec = np.zeros_like(subset)
     
     if isinstance(node, KDTree.innernode):
-        # set boolean switches to one if that idx beneath this node
         child_vec[node._node.indices] = 1
-        # does this branch contain children in the subset
         if np.dot(child_vec, subset) >= 1:
-            # determine which way to traverse
             if x[node._node.split_dim] < node._node.split:
                 near, far = node._node.lesser, node._node.greater
             else:
                 near, far = node._node.greater, node._node.lesser
             near = _query_subset(self, near, x, subset, p)
             
-            # if near branch resulted in a dead end, check the far
             if not near:
                 return _query_subset(self, far, x, subset, p)
-            # is the further branch closer
             far = _query_subset(self, far, x, subset, p)
             if far:
                 if near[1] > far[1]:
@@ -62,19 +56,14 @@ def _query_subset(self, node, x, subset, p):
             return near
     else:
         child_vec[node.indices] = 1
-        # does this leaf intersect with subset
         if np.dot(child_vec, subset) >= 1: 
-            # get the universe of intersecting points
             universe = np.arange(self.n)[subset.astype(bool)]
             candidates = np.intersect1d(universe, node.indices)
-            # compute the candidatae distances
             distances = ((pt, minkowski_distance_p(x, self.data[pt], p))
                          for pt in candidates)
-            #return the closest point
             return min(distances, key=lambda tup: tup[1])
 
 def test_subset_query(runs):
-    # set up a random kdtree and 
     succ = 0
     for i, x in enumerate(range(runs), 1):
         n = 100000

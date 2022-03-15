@@ -3,7 +3,6 @@ import pickle
 import pandas as pd
 from constants import tree_path, data_path
 from pathlib import Path
-import numpy as np
 
 
 pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
@@ -13,7 +12,7 @@ df = (
     .drop_duplicates(pos_cols)
     .dropna()
     .loc[:, lambda _df: _df.nunique() != 1]
-)
+).copy()
 
 tree = cKDTree(df.loc[:, pos_cols].values)
 
