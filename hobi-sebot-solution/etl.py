@@ -1,4 +1,4 @@
-from scipy.spatial import KDTree
+from scipy.spatial import cKDTree
 import pickle
 import pandas as pd
 from constants import tree_path, data_path
@@ -15,7 +15,7 @@ df = (
     .loc[:, lambda _df: _df.nunique() != 1]
 )
 
-tree = KDTree(df.loc[:, pos_cols].values)
+tree = cKDTree(df.loc[:, pos_cols].values)
 
 tree_path.write_bytes(pickle.dumps(tree))
 

@@ -33,23 +33,22 @@ def query_subset(self, x, subset, p=2):
     subset_vec = np.zeros(self.n)
     subset_vec[subset] = 1
     node = self.tree
-    return _query_subset(self, node._node, x, subset_vec, p)
+    return _query_subset(self, node, x, subset_vec, p)
 
 def _query_subset(self, node, x, subset, p):
     # initialize a boolean array of size n
     child_vec = np.zeros_like(subset)
     
     if isinstance(node, KDTree.innernode):
-        print('valami')
         # set boolean switches to one if that idx beneath this node
-        child_vec[node.indices] = 1
+        child_vec[node._node.indices] = 1
         # does this branch contain children in the subset
         if np.dot(child_vec, subset) >= 1:
             # determine which way to traverse
-            if x[node.split_dim] < node.split:
-                near, far = node.less, node.greater
+            if x[node._node.split_dim] < node._node.split:
+                near, far = node._node.lesser, node._node.greater
             else:
-                near, far = node.greater, node.less
+                near, far = node._node.greater, node._node.lesser
             near = _query_subset(self, near, x, subset, p)
             
             # if near branch resulted in a dead end, check the far
