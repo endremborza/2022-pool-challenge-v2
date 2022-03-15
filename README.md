@@ -12,6 +12,7 @@
 
 | name                | v                          |   ch2-L-100 |   ch2-L-5000 |   ch2-S-1000 |   ch2-S-50 |
 |:--------------------|:---------------------------|------------:|-------------:|-------------:|-----------:|
+| bontomunkas         | [v1](../../commit/210be6f) |    nan      |      nan     |    nan       |   1.27235  |
 | csobotsebibisect    | [v1](../../commit/29450c9) |      3.5457 |      nan     |      4.15112 |   0.566334 |
 | hobi-sebot-solution | [v1](../../commit/f4662c7) |      9.0184 |      nan     |      3.46514 |   0.534007 |
 | hobi-sebot-solution | [v2](../../commit/1d3d0eb) |    nan      |      nan     |      2.89402 |   0.521794 |
@@ -20,6 +21,6 @@
 | hobi-sebot-solution | [v5](../../commit/6d15cbd) |    nan      |      nan     |     13.8274  |   1.09583  |
 | hobi-sebot-solution | [v6](../../commit/4100f53) |    nan      |      nan     |     13.5742  |   1.35401  |
 | hobi-sebot-solution | [v7](../../commit/e50eaa7) |    nan      |      nan     |     17.1944  |   1.12709  |
-| hobi-sebot-solution | [v8](../../commit/7d33778) |     45.4748 |      nan     |     19.258   |   1.11385  |
+| hobi-sebot-solution | [v8](../../commit/7d33778) |     35.1964 |      nan     |     19.258   |   1.31269  |
 | lili_sara_gyenes_1  | [v1](../../commit/3b53a86) |    nan      |      274.114 |      4.74689 |   0.988394 |
-| lili_sara_gyenes_2  | [v1](../../commit/4c26f5d) |    nan      |      242.52  |      6.45425 |   0.996739 |
+| lili_sara_gyenes_2  | [v1](../../commit/4c26f5d) |    nan      |      242.52  |      5.77215 |   0.996739 |
