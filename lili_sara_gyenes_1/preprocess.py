@@ -1,14 +1,17 @@
-import pandas as pd
+from scipy.spatial import cKDTree
 import pickle
+import pandas as pd
+from pathlib import Path
+import numpy as np
 
-if __name__ == "__main__":
-    data = pd.read_csv("data.csv")
 
-    data["msec"] = data["msec"].astype(np.int32)
-    data["subject"] = data["subject"].astype("category")
+pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
 
-    cols_1 = ['msec', 'x_position', 'y_position', 'z_position', 'subject','trial']
+df = (
+    pd.read_csv(Path("data.csv"))
+    .drop_duplicates(pos_cols)
+    .dropna()
+    .loc[:, lambda _df: _df.nunique() != 1]
+)
 
-    data = data.loc[:,cols_1]
-
-    data.to_pickle("data.pkl")
+df.to_pickle("data.pkl")
