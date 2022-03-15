@@ -4,3 +4,4 @@ numpy
 pathlib
 sklearn
 numba
+requests
