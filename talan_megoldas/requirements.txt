@@ -1,6 +1,5 @@
 pandas
 flask
-json
 numpy
 pathlib
 sklearn
