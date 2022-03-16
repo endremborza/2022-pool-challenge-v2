@@ -34,4 +34,4 @@ if __name__ == "__main__":
             out.append({"msec": msec, "subject": subject, "trial": trial})
         return out
 
-    Path("output.json").write_text(json.dumps(solution_list(numpy_df, numpy_input)))
+    Path("output.json").write_text(json.dumps(solution(numpy_df, numpy_input)))
