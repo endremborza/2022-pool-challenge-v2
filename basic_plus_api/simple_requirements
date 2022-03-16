@@ -1,0 +1,7 @@
+pandas
+flask
+numpy
+pathlib
+sklearn
+numba
+requests
