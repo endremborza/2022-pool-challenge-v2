@@ -11,7 +11,6 @@ if __name__ == "__main__":
 
     df = pd.read_pickle("data.pkl")
     input_locations = json.loads(Path("input.json").read_text())
-    result_locations = json.loads(Path("results.json").read_text())
     df.drop_duplicates(subset=out_cols).drop_duplicates(subset=pos_cols)
     input = np.array([list(i.values())[:3] for i in input_locations])
     lista = []
