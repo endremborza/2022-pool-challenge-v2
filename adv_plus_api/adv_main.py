@@ -10,11 +10,16 @@ app = Flask(__name__)
 pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
 out_cols = ["msec", "subject", "trial"]
 
-pd.read_csv("data.csv").to_pickle("data.pkl")
+df = pd.read_csv("data.csv")
+input_locations = json.loads(Path("C:\Rajk_Prog_II\Prog_datasets\input.json").read_text())
+
 
 @app.route("/started")
 def started():
     return "FING"
+    
+numpy_df = df.loc[:, pos_cols + out_cols].to_numpy()
+numpy_input = pd.DataFrame(input_locations).to_numpy()
 
 
 @app.route("/")
@@ -34,7 +39,8 @@ def solution(numpy_df, numpy_input):
         trial = numpy_df[:, [-1]][mask][ind][0][0]
         out.append({"msec": msec, "subject": subject, "trial": trial})
     return out
-
+    
+Path("output.json").write_text(json.dumps(solution(numpy_df, numpy_input)))
 
 app.dfo = (
     pd.read_csv("data.csv")
