@@ -29,3 +29,4 @@
 | lili_sara_gyenes_2  | [v1](../../commit/4c26f5d) |   nan       |      242.52  |      5.77215 |   1.23156  |            nan |
 | megoldas            | [v1](../../commit/c3ea7e6) |     4.67699 |      198.358 |      3.35917 |   0.630882 |            nan |
 | pff                 | [v1](../../commit/139c752) |     6.53557 |      284.419 |      1.81438 |   0.354447 |            nan |
+| pff                 | [v2](../../commit/db5214d) |   nan       |      nan     |    nan       | nan        |            nan |
