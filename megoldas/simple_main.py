@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-import json
 from pathlib import Path
+import json
 
 pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
 res_cols = ["msec", "subject", "trial"]
