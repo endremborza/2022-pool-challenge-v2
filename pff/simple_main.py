@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import json
+from sklearn.neighbors import KDTree
+
 
 pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
 res_cols = ["msec", "subject", "trial"]
@@ -13,7 +15,7 @@ if __name__ == "__main__":
     numpy_df = df.loc[:, pos_cols + res_cols].to_numpy()
     numpy_input = pd.DataFrame(input_locations).to_numpy()
 
-    def solution_list(numpy_df, numpy_input):
+    def solution(numpy_df, numpy_input):
         out = []
         for i in range(len(numpy_input)):
             mask = (
@@ -21,15 +23,14 @@ if __name__ == "__main__":
                 & (numpy_df[:, [-3]] <= numpy_input[:, [-1]][i][0])
                 & (numpy_df[:, [-2]] == numpy_input[:, [-3]][i][0])
             )
-            pos_arr = np.array([numpy_input[0][c] for c in [0, 1, 2]], ndmin=2)
-            dumma = (
-                (numpy_df[:, [0]][mask] - numpy_input[:, [0]][i]) ** 2
-                + (numpy_df[:, [1]][mask] - numpy_input[:, [1]][i]) ** 2
-                + (numpy_df[:, [2]][mask] - numpy_input[:, [2]][i]) ** 2
+            merge_pos_arr = np.column_stack(
+                [numpy_df[:, [0]][mask], numpy_df[:, [1]][mask], numpy_df[:, [2]][mask]]
             )
-            msec = numpy_df[:, [-3]][mask][np.where(dumma == np.amin(dumma))[0][0]]
-            subject = numpy_df[:, [-2]][mask][np.where(dumma == np.amin(dumma))[0][0]]
-            trial = numpy_df[:, [-1]][mask][np.where(dumma == np.amin(dumma))[0][0]]
+            tree = KDTree(merge_pos_arr, leaf_size=50)
+            dist, ind = tree.query(numpy_input[i][:3].reshape(1, -1), k=1)
+            msec = numpy_df[:, [-3]][mask][ind][0][0]
+            subject = numpy_df[:, [-2]][mask][ind][0][0]
+            trial = numpy_df[:, [-1]][mask][ind][0][0]
             out.append({"msec": msec, "subject": subject, "trial": trial})
         return out
 
