@@ -26,7 +26,7 @@ if __name__ == "__main__":
             merge_pos_arr = np.column_stack(
                 [numpy_df[:, [0]][mask], numpy_df[:, [1]][mask], numpy_df[:, [2]][mask]]
             )
-            tree = KDTree(merge_pos_arr, leaf_size=50)
+            tree = KDTree(merge_pos_arr, leaf_size=500)
             dist, ind = tree.query(numpy_input[i][:3].reshape(1, -1), k=1)
             msec = numpy_df[:, [-3]][mask][ind][0][0]
             subject = numpy_df[:, [-2]][mask][ind][0][0]
