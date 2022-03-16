@@ -1,4 +1,4 @@
 image-base: python:3.9
 setup-command: pip install -r simple_requirements.txt
 etl-command: python simple_preprocess.py
-process-command: curl http://localhost:5120
+process-command: python simple_main.py

@@ -1,14 +1,5 @@
-import subprocess
-import requests
-import time
+import pandas as pd
 
-proc = subprocess.Popen(["python", "simple_main.py"])
 
-while True:
-    try:
-        time.sleep(1)
-        resp = requests.get("http://localhost:5120/started")
-        time.sleep(4)
-        break
-    except Exception as e:
-        pass
+if __name__ == "__main__":
+    pd.read_csv("data.csv").to_pickle("data.pkl")
