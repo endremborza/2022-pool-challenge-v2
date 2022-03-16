@@ -1,0 +1,4 @@
+image: endremborza/course:mytree
+setup-env-command: sleep 0
+etl-command: python ETL.py
+process-command: curl http://127.0.0.1:5112/
