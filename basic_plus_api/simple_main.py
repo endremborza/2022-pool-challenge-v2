@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from flask import Flask
-from flask import current_app
 from sklearn.neighbors import KDTree
+
 
 app = Flask(__name__)
 pos_cols = [f"{ax}_position" for ax in ["x", "y", "z"]]
