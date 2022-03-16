@@ -32,7 +32,7 @@ def solution():
         min_ind = ((df.loc[filt, pos_cols] - pos_arr) ** 2).sum(axis=1).idxmin()
         out.append(df.loc[min_ind, out_cols].to_dict())
 
-    Path("output.json").write_text(json.dumps(out))
+    Path("./output.json").write_text(json.dumps(out))
     return "FING"
 
 app.dfo = (
